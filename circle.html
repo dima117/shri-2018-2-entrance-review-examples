@@ -4,6 +4,18 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: scale(1.7);
+            }
+        </style>
     </head>
     <body>
         <svg width="200" height="200">
@@ -36,7 +48,7 @@
 
             function updateValue() {
                 var l = len * input.value / 100;
-                chart.style.strokeDasharray = l + '' + (d - l);
+                chart.style.strokeDasharray = l + ' ' + (d - l);
             }
 
             updateValue();
