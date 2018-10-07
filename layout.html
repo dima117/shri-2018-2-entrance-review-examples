@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html,
+            body,
+            .page {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .header,
+            .info,
+            .scenario,
+            .devices,
+            .footer {
+                background-color: #eee;
+                border: 5px solid white;
+                box-sizing: border-box;
+                padding: 32px;
+                font-size: 32px;
+                font-family: sans-serif;
+                font-weight: bold;
+                color: gray;
+            }
+
+            /* LAYOUT */
+            .page {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                flex: 1;
+
+                display: flex;
+                flex-direction: row;
+            }
+
+            .info,
+            .scenario {
+                flex-basis: 50%;
+            }
+
+            .devices {
+                width: 100%;
+                height: 140px;
+            }
+
+            @media (max-width: 640px) {
+                .container {
+                    flex-direction: column;
+                }
+
+                .info {
+                    flex-grow: 1;
+                }
+
+                .scenario {
+                    flex-basis: 140px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <div class="header">
+                header
+            </div>
+            <div class="container">
+                <div class="info">
+                    info
+                </div>
+                <div class="scenario">
+                    scenario
+                </div>
+            </div>
+            <div class="devices">
+                devices
+            </div>
+            <div class="footer">
+                footer
+            </div>
+        </div>
+    </body>
+</html>
