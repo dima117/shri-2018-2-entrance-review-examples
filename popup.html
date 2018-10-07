@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                counter-reset: num;
+                font-family: sans-serif;
+                font-size: 27px;
+
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                flex: 1;
+                padding: 22px 42px;
+            }
+
+            .actions {
+                height: 92px;
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                justify-content: space-around;
+            }
+
+            .item {
+                background-color: #eee;
+                width: 42px;
+                height: 42px;
+                line-height: 42px;
+                text-align: center;
+            }
+
+            .item:before {
+                counter-increment: num;
+                content: counter(num);
+                display: inline;
+            }
+
+            .opened .container,
+            .opened .actions {
+                -webkit-filter: blur(10px);
+                filter: blur(10px);
+            }
+
+            .paranja {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0.3);
+                display: none;
+            }
+
+            .opened .paranja {
+                display: block;
+            }
+
+            .popup {
+                width: 640px;
+                height: 320px;
+                background-color: white;
+                padding: 42px;
+
+                opacity: 0;
+                transform-origin: left top;
+                transform: scale(.1);
+                position: absolute;
+                transition: top 1s, left 1s, transform 1s, opacity 1s;
+                transition-timing-function: ease-in;
+            }
+
+            .opened.popup {
+                opacity: 1;
+                transform: translate(-50%,-50%) scale(1);
+                top: 50% !important;
+                left: 50% !important;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Sit amet cursus sit amet. Nulla facilisi morbi tempus iaculis urna id. Turpis
+                massa tincidunt dui ut ornare lectus. Eu mi bibendum neque egestas congue quisque egestas diam. Orci
+                porta non pulvinar neque laoreet. In nisl nisi scelerisque eu. Sapien pellentesque habitant morbi
+                tristique senectus et netus et. Quis lectus nulla at volutpat diam. Velit sed ullamcorper morbi
+                tincidunt ornare massa.
+            </p>
+            <p>
+                Viverra adipiscing at in tellus integer feugiat. Massa ultricies mi quis hendrerit dolor. Senectus et
+                netus et malesuada fames. Enim nunc faucibus a pellentesque. Nunc faucibus a pellentesque sit amet. Sed
+                velit dignissim sodales ut eu sem integer vitae. Lacinia quis vel eros donec. Nibh tellus molestie nunc
+                non blandit massa enim. Volutpat est velit egestas dui id ornare. Commodo quis imperdiet massa
+                tincidunt nunc pulvinar sapien et ligula. Sed elementum tempus egestas sed sed risus.
+            </p>
+            <p>
+                Mi sit amet mauris commodo. Etiam erat velit scelerisque in dictum non consectetur a. Dui faucibus in
+                ornare quam viverra orci sagittis. Aenean euismod elementum nisi quis eleifend. Purus faucibus ornare
+                suspendisse sed. Nec sagittis aliquam malesuada bibendum arcu. Sagittis purus sit amet volutpat
+                consequat. Sodales ut etiam sit amet nisl purus. Id diam vel quam elementum pulvinar etiam non quam
+                lacus. Tincidunt arcu non sodales neque sodales ut. Vulputate dignissim suspendisse in est ante in
+                nibh. Ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus. Nascetur ridiculus mus mauris
+                vitae ultricies leo. Turpis in eu mi bibendum neque egestas. Vel fringilla est ullamcorper eget nulla.
+                Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Sit amet risus nullam eget felis eget nunc
+                lobortis.
+            </p>
+        </div>
+        <div class="actions">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="paranja">
+            <div class="popup">
+                popup content
+            </div>
+        </div>
+        <script>
+            var popup = document.querySelector('.popup');
+
+            document.addEventListener('click', function(e){
+                var classList = e.target.classList;
+
+                if (classList.contains('item')) {
+                    var rect = e.target.getBoundingClientRect();
+                    popup.style.left = e.x + 'px';
+                    popup.style.top = e.y + 'px';
+                    setTimeout(function() {
+                        document.body.classList.add('opened');
+                        setTimeout(function() {
+                            popup.classList.add('opened');
+                        }, 10);
+                    }, 10);
+
+                } else if (classList.contains('paranja')) {
+                    popup.classList.remove('opened');
+                    setTimeout(function() {
+                        document.body.classList.remove('opened');
+                    }, 1000);
+                }
+            });
+        </script>
+    </body>
+</html>
