@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type=range][orient=vertical] {
+            writing-mode: bt-lr; /* IE */
+            -webkit-appearance: slider-vertical; /* WebKit */
+        }
+
+        #target {
+            height: calc(100% - 80px);
+            width: calc(100% - 80px);
+            margin: 40px;
+        }
+    </style>
+    </head>
+    <body>
+        <input type="range" id="target" />
+
+        <script>
+            var input = document.getElementById('target');
+
+            // media query event handler
+            if (matchMedia) {
+                const mq = window.matchMedia("(min-width: 700px)");
+                mq.addListener(WidthChange);
+                WidthChange(mq);
+            }
+
+            // media query change
+            function WidthChange(mq) {
+                if (mq.matches) {
+                    // window width is at least 700px
+                    input.removeAttribute('orient');
+                } else {
+                    // window width is less than 700px
+                    input.setAttribute('orient', 'vertical');
+                }
+            }
+        </script>
+    </body>
+</html>
