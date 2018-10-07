@@ -13,7 +13,10 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                transform: scale(1.7);
+            }
+
+            svg {
+                touch-action: none;
             }
         </style>
     </head>
@@ -46,13 +49,35 @@
             var chart = document.getElementById('bar');
             var input = document.getElementById('input');
 
-            function updateValue() {
-                var l = len * input.value / 100;
+            function updateValue(val) {
+                var l = len * (val || input.value) / 100;
                 chart.style.strokeDasharray = l + ' ' + (d - l);
             }
 
             updateValue();
             input.addEventListener('change', updateValue);
+
+            let params = undefined;
+            const svg = document.querySelector('svg');
+            svg.addEventListener('pointerdown', function(e) {
+                const r = svg.getBoundingClientRect();
+                params = {
+                    x: r.x + r.width / 2,
+                    y: r.y + r.height / 2
+                }
+            });
+
+            svg.addEventListener('pointermove', function(e) {
+                if (params) {
+                    const dx = e.clientX - params.x;
+                    const dy = e.clientY - params.y;
+                    const a = Math.atan2(dy, dx);
+                    // console.log(dx, dy, a);
+                    const val = ((a / Math.PI * 180 - 120) + 360) % 360;
+                    const val2 = val / 290 * 100;
+                    updateValue(val2);
+                }
+            });
         </script>
     </body>
 </html>
